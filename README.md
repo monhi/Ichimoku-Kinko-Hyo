@@ -8,3 +8,4 @@ For that in the first phase, I find and write the useful links in the following 
 * https://osghaffar.github.io/Ichimoku-Algo-Trading/
 * https://github.com/rd13/ichimoku
 * https://school.stockcharts.com/doku.php?id=technical_indicators:ichimoku_cloud
+* https://recharts.org/en-US/examples  (for chart and diagram)

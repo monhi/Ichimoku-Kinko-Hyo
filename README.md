@@ -1,7 +1,9 @@
 # Ichimoku
 
-Plot Ichimoku diagram for a time series data
+Plot Ichimoku diagram for a time series data.
+
 Here I use different open source projects to investigate how Ichimoku works.
+
 For that in the first phase, I find and write the useful links in the following section.
 
 # Links:

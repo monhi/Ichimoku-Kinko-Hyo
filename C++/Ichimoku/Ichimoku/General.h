@@ -6,10 +6,15 @@
 #define SUCCESS  0
 #define FAILURE -1
 
-typedef unsigned int u32;
-typedef			 int i32;
+typedef unsigned int	u32;
+typedef			 int	i32;
+typedef			 double node_t;
 
-typedef double node_t;
+typedef struct SenkouSpan_t {
+	node_t a;
+	node_t b;
+} SenkouSpan_t;
+
 
 struct PriceData 
 {

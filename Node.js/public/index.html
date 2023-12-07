@@ -23,6 +23,22 @@
 window.onload = function () {}
 
 
+
+
+function FetchFunction()
+{
+	fetch('http://localhost:3000/v1/getData')
+	.then(data => {
+	return data.json();
+	})
+	.then(post => {
+	console.log(post.title);
+	console.log(post.Kumo);
+
+	});
+
+}
+
 function RenderFunction()
 {
 
@@ -136,13 +152,8 @@ function toogleDataSeries(e) {
 <body style=" height:1000px" >
 <div id="chartContainer" style="height: 80%; max-width: 90%; margin: 0px auto;"></div>
 
-<button class="button button1" onclick="RenderFunction()" >Show Data</button>
-
-
-
+<button class="button button1" onclick="FetchFunction()" >Show Data</button>
 <script src="./js/canvasjs.min.js"></script>
-
-
 
 </body>
 </html>

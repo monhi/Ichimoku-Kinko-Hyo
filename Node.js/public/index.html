@@ -2,8 +2,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<style>
+	.button {
+	  border: none;
+	  color: white;
+	  padding: 15px 32px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  cursor: pointer;
+	}
+	
+	.button1 {background-color: #04AA6D;} /* Green */
+	</style>
+
 <script>
-window.onload = function () {
+window.onload = function () {}
+
+
+function RenderFunction()
+{
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
@@ -78,18 +99,22 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		//xValueFormatString: "DD MMM, YYYY",
 		color: "#00ff00",
 		dataPoints: [
-			{ x: new Date(2016, 00, 01), y: 510 },
-			{ x: new Date(2016, 01, 01), y: 560 },
-			{ x: new Date(2016, 02, 01), y: 540 },
-			{ x: new Date(2016, 03, 01), y: 558 },
-			{ x: new Date(2016, 04, 01), y: 544 },
 			{ x: new Date(2016, 05, 01), y: 693 },
 			{ x: new Date(2016, 06, 01), y: 657 },
 			{ x: new Date(2016, 07, 01), y: 663 },
 			{ x: new Date(2016, 08, 01), y: 639 },
 			{ x: new Date(2016, 09, 01), y: 673 },
 			{ x: new Date(2016, 10, 01), y: 660 },
-			{ x: new Date(2016, 11, 01), y: 562 }
+			{ x: new Date(2016, 11, 01), y: 562 },
+			{ x: new Date(2017, 01, 01), y: 562 },
+			{ x: new Date(2017, 02, 01), y: 562 },
+			{ x: new Date(2017, 03, 01), y: 562 },
+			{ x: new Date(2017, 04, 01), y: 562 },
+			{ x: new Date(2017, 05, 01), y: 562 },
+			{ x: new Date(2017, 06, 01), y: 562 },
+			{ x: new Date(2017, 07, 01), y: 562 },
+			{ x: new Date(2017, 08, 01), y: 562 },
+			{ x: new Date(2017, 09, 01), y: 562 }
 			]
 	}
 	]
@@ -110,6 +135,14 @@ function toogleDataSeries(e) {
 </head>
 <body style=" height:1000px" >
 <div id="chartContainer" style="height: 80%; max-width: 90%; margin: 0px auto;"></div>
+
+<button class="button button1" onclick="RenderFunction()" >Show Data</button>
+
+
+
 <script src="./js/canvasjs.min.js"></script>
+
+
+
 </body>
 </html>

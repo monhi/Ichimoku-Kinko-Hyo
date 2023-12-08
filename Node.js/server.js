@@ -18,6 +18,7 @@ let RawData;
 
 
 
+
 try 
 {
   const ChikouSpan = fs.readFileSync('../C++/Ichimoku/Debug/DATA/ChikouSpan.json', 'utf8');
@@ -74,10 +75,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 
+// const d = new Date(2021,3,25,10,30,00);
+// console.log(d);
+
+//let d = new Date().toLocaleString();
+let d = new Date();
+console.log(d);
+// Create new Date instance
+//var date = new Date()
+// Add a day
+//d.setDate(d.getDate() + 1)
+//console.log(d);
+
+//d.setMinutes(d.getMinutes()+20)
+//console.log(d);
+
+
+
 app.get("/v1/getData", (req, res) => {
-    res.json({title:"BTC",ChikouSpan,KijunSen,Kumo,TenkanSen,RawData});
+    res.json({title:"BTC",Date:d,quantom:"1day",ChikouSpan,KijunSen,Kumo,TenkanSen,RawData});
 	console.log("Here:/v1/getData");
 });
+
+
 
 
 app.listen(PORT,()=>{

@@ -92,6 +92,14 @@ console.log(d);
 
 
 
+
+
+app.get("/v1/getCoins", (req, res) => {
+    res.json([{data:"BTC"},{data:"OP"},{data:"C98"}]);
+	console.log("Here:/v1/getCoins");
+});
+
+
 app.get("/v1/getData", (req, res) => {
     res.json({title:"BTC",Date:d,quantom:"1day",ChikouSpan,KijunSen,Kumo,TenkanSen,RawData});
 	console.log("Here:/v1/getData");

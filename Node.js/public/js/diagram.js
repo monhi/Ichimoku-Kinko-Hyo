@@ -1,5 +1,21 @@
-window.onload = function () {}
+window.onload = function () 
+{
+	FetchCoinFunction();
+}
 
+function FetchCoinFunction()
+{
+	fetch('http://localhost:3000/v1/getCoins')
+	.then(data => {
+	return data.json();
+	})
+	.then(post => {
+	console.log(post);
+	
+
+	});
+
+}
 
 function FetchFunction()
 {
@@ -29,7 +45,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	theme: "light1", // "light1", "light2", "dark1", "dark2"
 	exportEnabled: true,
 	title:{
-		text: "Stock Price: AT&T Vs Verizon for 2016"
+		text: title
 	},
 	axisX: {
 		valueFormatString: "MMM DD"

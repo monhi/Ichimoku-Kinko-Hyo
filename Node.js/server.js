@@ -16,7 +16,7 @@ let RawData;
 
 try 
 {
-  	ChikouSpan = fs.readFileSync('../C++/Ichimoku/Debug/DATA/ChikouSpan.json', 'utf8');
+  	ChikouSpan = fs.readFileSync('./DATA/ChikouSpan.json', 'utf8');
 	console.log("ChikouSpan:",ChikouSpan);
 } 
 catch (err) 
@@ -27,7 +27,7 @@ catch (err)
 
 try 
 {
-  KijunSen = fs.readFileSync('../C++/Ichimoku/Debug/DATA/KijunSen.json', 'utf8');
+  KijunSen = fs.readFileSync('./DATA/KijunSen.json', 'utf8');
 	//console.log(KijunSen);
 } 
 catch (err) 
@@ -38,7 +38,7 @@ catch (err)
 
 try 
 {
-  	Kumo = fs.readFileSync('../C++/Ichimoku/Debug/DATA/kumo.json', 'utf8');
+  	Kumo = fs.readFileSync('./DATA/kumo.json', 'utf8');
 	//console.log(Kumo);
 } 
 catch (err) 
@@ -48,7 +48,7 @@ catch (err)
 
 try 
 {
-	TenkanSen = fs.readFileSync('../C++/Ichimoku/Debug/DATA/TenkanSen.json', 'utf8');
+	TenkanSen = fs.readFileSync('./DATA/TenkanSen.json', 'utf8');
 	//console.log(TenkanSen);
 } 
 catch (err) 
@@ -58,7 +58,7 @@ catch (err)
 
 try 
 {
-	RawData = fs.readFileSync('../C++/Ichimoku/Debug/DATA/RawData.json', 'utf8');
+	RawData = fs.readFileSync('./DATA/RawData.json', 'utf8');
 	//console.log(RawData);
 } 
 catch (err) 

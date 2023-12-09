@@ -85,24 +85,17 @@ console.log(d);
 //d.setMinutes(d.getMinutes()+20)
 //console.log(d);
 
-
-
-
-
 app.get("/v1/getCoins", (req, res) => {
-    res.json([{data:"BTC"},{data:"ETH"},{data:"OP"},{data:"C98"}]);
-	console.log("HERE /v1/getCoins");
+	console.log("HERE /v1/getCoins");    
+	res.json([{data:"BTC"},{data:"ETH"},{data:"LUNC"},{data:"DOGE"},{data:"PEOPLE"},{data:"CFX"},{data:"BNB"},{data:"APT"},{data:"DOT"},{data:"LDO"},{data:"FTM"},{data:"OP"},{data:"DYDX"},{data:"SHIB"},{data:"LINK"},{data:"XRP"},{data:"AVAX"},{data:"ICP"},{data:"EOS"},{data:"LTC"},{data:"CRV"},{data:"ADA"},{data:"GALA"},{data:"SAND"},{data:"NEAR"},{data:"MINA"},{data:"AR"},{data:"MATIC"},{data:"FLOW"},{data:"FXS"},{data:"FET"},{data:"CHZ"},{data:"JASMY"},{data:"GRT"},{data:"FIL"},{data:"ATOM"},{data:"STORJ"},{data:"LRC"},{data:"UNI"},{data:"IMX"},{data:"MANA"},{data:"AAVE"},{data:"GMT"},{data:"ROSE"},{data:"EGLD"},{data:"COTI"},{data:"XMR"},{data:"KSM"},{data:"OCEAN"},{data:"HBAR"},{data:"DASH"},{data:"CELO"},{data:"SUSHI"},{data:"KAVA"},{data:"RUNE"},{data:"ZEC"},{data:"ENS"},{data:"SKL"},{data:"BCH"},{data:"TRX"},{data:"GTC"},{data:"1INCH"},{data:"QNT"},{data:"ONE"},{data:"XLM"},{data:"ENJ"},{data:"ALICE"},{data:"BAT"},{data:"XTZ"},{data:"ONT"},{data:"COMP"},{data:"IOTX"},{data:"ARPA"},{data:"BAND"},{data:"RVN"},{data:"APE"},{data:"SFP"},{data:"OMG"},{data:"KNC"},{data:"SOL"},{data:"FLM"},{data:"ANT"},{data:"VET"},{data:"AUDIO"},{data:"AUD"},{data:"BAL"},{data:"CORE"},{data:"IOST"},{data:"COMP"},{data:"LUNA"},{data:"KAVA"},{data:"TONCOIN"},{data:"ANKR"},{data:"SNX"},{data:"RNDR"},{data:"MASK"},{data:"ASTR"},{data:"OGN"},{data:"ETC"},{data:"AXS"},{data:"ZIL"},{data:"YFI"},{data:"ALGO"},{data:"THETA"},{data:"OGN"},{data:"ZRX"},{data:"GT"},{data:"MKR"},{data:"GAL"},{data:"HOOK"},{data:"MAGIC"},{data:"WAVES"}]);
+	
 });
 
 
 app.get("/v1/getData", (req, res) => {
 	console.log(`HERE /v1/getData CoinName is: ${req.query.coin}`);
-    res.json({title:"BTC",Date:d,quantom:"1day",ChikouSpan,KijunSen,Kumo,TenkanSen,RawData});
-	
+    res.json({title:"BTC",Date:d,quantom:"1day",ChikouSpan,KijunSen,Kumo,TenkanSen,RawData});	
 });
-
-
-
 
 app.listen(PORT,()=>{
 	console.log(`Listening to port ${PORT}`);

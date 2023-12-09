@@ -154,9 +154,23 @@ function KumoDiagram(x,y)
 	let length = y.length;
 	for (let i=0; i < length; i++)
 	{ 
+		let a = y[i].a;
+		let b = y[i].b;
+/*
+		if (a>b)
+		{
+			a = a-2;
+			b = b+2;
+		}
+		else if (b > a )
+		{
+			a = a+2;
+			b = b-2;
+		}
+*/
 		let obj = {};
 		obj.x 	= x[i+26];
-		obj.y 	= [y[i].a,y[i].b];
+		obj.y 	= [a,b];
 		res[i] 	= obj;
 	}
 	return res;	
@@ -197,7 +211,8 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		cursor: "pointer",
 		itemclick: toogleDataSeries
 	},
-	data: [{
+	data: [
+	{
 		type: "candlestick",
 		showInLegend: true,
 		name: title,
@@ -232,10 +247,10 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	{
 		type: "rangeArea",
 		showInLegend: true,
-		toolTipContent: " <span style=\"color:#4F81BC\">{x}</span><br><b>Min:</b> {y[0]}<br><b>Max:</b> {y[1]}",		
+		fillOpacity: .1,
 		name: "Kumo",
 		markerType: "square",	
-		color: "#03fcf8",
+		color: "#5e1011",
 		dataPoints: KumoPoints
 	},	
 	{
@@ -243,7 +258,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		showInLegend: true,
 		name: "KumoA",
 		markerType: "square",	
-		color: "#fc0303",
+		color: "#105e13",
 		dataPoints: kumoAPoints
 	},
 	{
@@ -251,7 +266,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		showInLegend: true,
 		name: "KumoB",
 		markerType: "square",	
-		color: "#03fcf8",
+		color: "#5e1011",
 		dataPoints: KumoBPoints
 	}
 	]

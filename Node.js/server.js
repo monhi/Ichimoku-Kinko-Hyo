@@ -16,8 +16,8 @@ let RawData;
 
 try 
 {
-  	const ChikouSpan = fs.readFileSync('../C++/Ichimoku/Debug/DATA/ChikouSpan.json', 'utf8');
-	console.log(ChikouSpan);
+  	ChikouSpan = fs.readFileSync('../C++/Ichimoku/Debug/DATA/ChikouSpan.json', 'utf8');
+	console.log("ChikouSpan:",ChikouSpan);
 } 
 catch (err) 
 {
@@ -28,7 +28,7 @@ catch (err)
 try 
 {
   KijunSen = fs.readFileSync('../C++/Ichimoku/Debug/DATA/KijunSen.json', 'utf8');
-	console.log(KijunSen);
+	//console.log(KijunSen);
 } 
 catch (err) 
 {
@@ -39,7 +39,7 @@ catch (err)
 try 
 {
   	Kumo = fs.readFileSync('../C++/Ichimoku/Debug/DATA/komu.json', 'utf8');
-	console.log(Kumo);
+	//console.log(Kumo);
 } 
 catch (err) 
 {
@@ -49,7 +49,7 @@ catch (err)
 try 
 {
 	TenkanSen = fs.readFileSync('../C++/Ichimoku/Debug/DATA/TenkanSen.json', 'utf8');
-	console.log(TenkanSen);
+	//console.log(TenkanSen);
 } 
 catch (err) 
 {
@@ -59,7 +59,7 @@ catch (err)
 try 
 {
 	RawData = fs.readFileSync('../C++/Ichimoku/Debug/DATA/RawData.json', 'utf8');
-	console.log(RawData);
+	//console.log(RawData);
 } 
 catch (err) 
 {
@@ -74,8 +74,8 @@ app.use(express.static('public'));
 // console.log(d);
 
 //let d = new Date().toLocaleString();
-let d = new Date();
-console.log(d);
+//let d = new Date();
+//console.log(d);
 // Create new Date instance
 //var date = new Date()
 // Add a day
@@ -94,7 +94,13 @@ app.get("/v1/getCoins", (req, res) => {
 
 app.get("/v1/getData", (req, res) => {
 	console.log(`HERE /v1/getData CoinName is: ${req.query.coin}`);
-    res.json({title:"BTC",Date:d,quantom:"1day",ChikouSpan,KijunSen,Kumo,TenkanSen,RawData});	
+	let curCoin = req.query.coin;
+	let startTime = new Date();
+	startTime.setMinutes(startTime.getMinutes()-1280+210); // 1280 means 1280 munites before. 210 is greenwich offset. 
+	console.log(startTime);
+	console.log(ChikouSpan);
+	
+    res.json({title:curCoin,Date:startTime,quantom:"5min",RawData,TenkanSen,KijunSen,ChikouSpan,Kumo});	
 });
 
 app.listen(PORT,()=>{

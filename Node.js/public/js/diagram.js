@@ -44,21 +44,136 @@ function FetchDataFunction(coinName)
 	return data.json();
 	})
 	.then(post => {
-	//console.log(post.title);
-	//console.log(post.Date);
-
-	let starttime = new Date(post.Date);
-	
-//	console.log(starttime.getDay());
-//	console.log(starttime.getHours());
-//	console.log(starttime.getMinutes());
-
+		console.log(post.ChikouSpan);
+		RenderFunction(post.title,post.Date,post.quantom,JSON.parse(post.RawData),JSON.parse(post.TenkanSen),JSON.parse(post.KijunSen),JSON.parse(post.ChikouSpan),JSON.parse(post.Kumo));
 	});
-
 }
 
-function RenderFunction(title,date,quantom,ChikouSpan,KijunSen,Kumo,TenkanSen,RawData)
+function CalcXVector(date,quantom,length)
 {
+	let res = [];
+	for (let i=0; i < length+26;i++)
+	{
+		res[i] = new Date(date);
+		if( quantom == "5min" )
+		{
+			res[i].setMinutes(res[i].getMinutes()+i*5);
+		}		
+	}
+	return res;
+}
+
+function RawDataDiagram(x,y)
+{
+	let res = [];
+	let length = y.length;
+	for (let i=0; i < length; i++)
+	{ //y: [Open, High ,Low, Close]
+		let obj = {};
+		obj.x 	= x[i];
+		obj.y 	= [y[i].open,y[i].high,y[i].low,y[i].close];
+		res[i] 	= obj;
+	}
+	return res;
+}
+
+function TenKanSenDiagram(x,y)
+{
+	let res = [];
+	let length = y.length;
+	for (let i=0; i < length; i++)
+	{ 
+		let obj = {};
+		obj.x 	= x[i];
+		obj.y 	= y[i].data;
+		res[i] 	= obj;
+	}
+	return res;
+}
+
+function KiJunSenDiagram(x,y)
+{
+	let res = [];
+	let length = y.length;
+	for (let i=0; i < length; i++)
+	{ 
+		let obj = {};
+		obj.x 	= x[i];
+		obj.y 	= y[i].data;
+		res[i] 	= obj;
+	}
+	return res;
+}
+
+function ChikouSpanDiagram(x,y)
+{
+	let res = [];
+	let length = y.length;
+	for (let i=0; i < length-26; i++)
+	{ 
+		let obj = {};
+		obj.x 	= x[i];
+		obj.y 	= y[i].data;
+		res[i] 	= obj;
+	}
+	return res;	
+}
+
+function KumoADiagram(x,y)
+{
+	let res = [];
+	let length = y.length;
+	for (let i=0; i < length; i++)
+	{ 
+		let obj = {};
+		obj.x 	= x[i+26];
+		obj.y 	= y[i].a;
+		res[i] 	= obj;
+	}
+	return res;	
+}
+
+
+function KumoBDiagram(x,y)
+{
+	let res = [];
+	let length = y.length;
+	for (let i=0; i < length; i++)
+	{ 
+		let obj = {};
+		obj.x 	= x[i+26];
+		obj.y 	= y[i].b;
+		res[i] 	= obj;
+	}
+	return res;	
+}
+
+function KumoDiagram(x,y)
+{
+	let res = [];
+	let length = y.length;
+	for (let i=0; i < length; i++)
+	{ 
+		let obj = {};
+		obj.x 	= x[i+26];
+		obj.y 	= [y[i].a,y[i].b];
+		res[i] 	= obj;
+	}
+	return res;	
+}
+
+
+function RenderFunction(title,date,quantom,RawData,TenkanSen,KijunSen,ChikouSpan,Kumo)
+{
+	let xVector 		 = CalcXVector(date,quantom,RawData.length);
+	let rawDataPoints	 = RawDataDiagram(xVector,RawData);
+	let tenKanSenPoints  = TenKanSenDiagram(xVector,TenkanSen);
+	let kiJunSenPoints   = KiJunSenDiagram(xVector,KijunSen);
+	let chikouSpanPoints = ChikouSpanDiagram(xVector,ChikouSpan);
+	let kumoAPoints      = KumoADiagram(xVector,Kumo);
+	let KumoBPoints      = KumoBDiagram(xVector,Kumo);
+	let KumoPoints 		 = KumoDiagram(xVector,Kumo);
+
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
@@ -68,12 +183,12 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		text: title
 	},
 	axisX: {
-		valueFormatString: "MMM DD"
+		valueFormatString: "hh:mm"
 	},
 	axisY: {
 		includeZero:false, 
 		prefix: "$",
-		title: "Price (in USD)"
+		title: "Price (USDT)"
 	},
 	toolTip: {
 		shared: true
@@ -85,71 +200,59 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	data: [{
 		type: "candlestick",
 		showInLegend: true,
-		name: "AT&T",
+		name: title,
 		yValueFormatString: "$###0.00",
-		//xValueFormatString: "DD MMM, YYYY",
-		dataPoints: [
-			{ x: new Date(2016, 00, 01), y: [340.080002, 360.060001, 330.410000, 360.060001] },
-			{ x: new Date(2016, 01, 01), y: [360.040001, 370.500000, 350.790001, 360.950001] },
-			{ x: new Date(2016, 02, 01), y: [370.099998, 390.720001, 370.060001, 390.169998] },
-			{ x: new Date(2016, 03, 01), y: [380.669998, 390.360001, 370.730000, 380.820000] },
-			{ x: new Date(2016, 04, 01), y: [380.869999, 390.669998, 370.770000, 390.150002] },
-			{ x: new Date(2016, 05, 01), y: [390.099998, 430.419998, 380.580002, 430.209999] },
-			{ x: new Date(2016, 06, 01), y: [430.209999, 430.889999, 410.700001, 430.290001] },
-			{ x: new Date(2016, 07, 01), y: [430.250000, 430.500000, 400.549999, 400.880001] },
-			{ x: new Date(2016, 08, 01), y: [400.849998, 410.700001, 390.549999, 400.610001] },
-			{ x: new Date(2016, 09, 01), y: [400.619999, 410.040001, 360.270000, 360.790001] },
-			{ x: new Date(2016, 10, 01), y: [360.970001, 390.669998, 360.099998, 380.630001] },
-			{ x: new Date(2016, 11, 01), y: [380.630001, 420.840000, 380.160000, 400.380001] }
-		]
+		dataPoints: rawDataPoints
+
 	},
 	{
 		type: "line",
 		showInLegend: true,
-		name: "Total Visit",
-		markerType: "square",
-		//xValueFormatString: "DD MMM, YYYY",
+		name: "TenkanSen",
+		markerType: "square",	
 		color: "#F08080",
-		dataPoints: [
-			{ x: new Date(2016, 00, 01), y: 650 },
-			{ x: new Date(2016, 01, 01), y: 700 },
-			{ x: new Date(2016, 02, 01), y: 710 },
-			{ x: new Date(2016, 03, 01), y: 658 },
-			{ x: new Date(2016, 04, 01), y: 734 },
-			{ x: new Date(2016, 05, 01), y: 963 },
-			{ x: new Date(2016, 06, 01), y: 847 },
-			{ x: new Date(2016, 07, 01), y: 853 },
-			{ x: new Date(2016, 08, 01), y: 869 },
-			{ x: new Date(2016, 09, 01), y: 943 },
-			{ x: new Date(2016, 10, 01), y: 970 },
-			{ x: new Date(2016, 11, 01), y: 869 }
-		]
+		dataPoints: tenKanSenPoints
 	},
 	{
 		type: "line",
 		showInLegend: true,
-		name: "Unique Visit",
-		lineDashType: "dash",
-		//xValueFormatString: "DD MMM, YYYY",
-		color: "#00ff00",
-		dataPoints: [
-			{ x: new Date(2016, 05, 01), y: 693 },
-			{ x: new Date(2016, 06, 01), y: 657 },
-			{ x: new Date(2016, 07, 01), y: 663 },
-			{ x: new Date(2016, 08, 01), y: 639 },
-			{ x: new Date(2016, 09, 01), y: 673 },
-			{ x: new Date(2016, 10, 01), y: 660 },
-			{ x: new Date(2016, 11, 01), y: 562 },
-			{ x: new Date(2017, 01, 01), y: 562 },
-			{ x: new Date(2017, 02, 01), y: 562 },
-			{ x: new Date(2017, 03, 01), y: 562 },
-			{ x: new Date(2017, 04, 01), y: 562 },
-			{ x: new Date(2017, 05, 01), y: 562 },
-			{ x: new Date(2017, 06, 01), y: 562 },
-			{ x: new Date(2017, 07, 01), y: 562 },
-			{ x: new Date(2017, 08, 01), y: 562 },
-			{ x: new Date(2017, 09, 01), y: 562 }
-			]
+		name: "KijunSen",
+		markerType: "square",	
+		color: "#1f2fbf",
+		dataPoints: kiJunSenPoints
+	},
+	{
+		type: "line",
+		showInLegend: true,
+		name: "ChikouSpan",
+		markerType: "square",	
+		color: "#37f734",
+		dataPoints: chikouSpanPoints
+	},
+	{
+		type: "rangeArea",
+		showInLegend: true,
+		toolTipContent: " <span style=\"color:#4F81BC\">{x}</span><br><b>Min:</b> {y[0]}<br><b>Max:</b> {y[1]}",		
+		name: "Kumo",
+		markerType: "square",	
+		color: "#03fcf8",
+		dataPoints: KumoPoints
+	},	
+	{
+		type: "line",
+		showInLegend: true,
+		name: "KumoA",
+		markerType: "square",	
+		color: "#fc0303",
+		dataPoints: kumoAPoints
+	},
+	{
+		type: "line",
+		showInLegend: true,
+		name: "KumoB",
+		markerType: "square",	
+		color: "#03fcf8",
+		dataPoints: KumoBPoints
 	}
 	]
 });

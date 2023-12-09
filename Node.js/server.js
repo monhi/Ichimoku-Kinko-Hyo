@@ -38,7 +38,7 @@ catch (err)
 
 try 
 {
-  	Kumo = fs.readFileSync('../C++/Ichimoku/Debug/DATA/komu.json', 'utf8');
+  	Kumo = fs.readFileSync('../C++/Ichimoku/Debug/DATA/kumo.json', 'utf8');
 	//console.log(Kumo);
 } 
 catch (err) 

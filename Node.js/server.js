@@ -14,14 +14,9 @@ let Kumo;
 let TenkanSen;
 let RawData;
 
-
-
-
-
-
 try 
 {
-  const ChikouSpan = fs.readFileSync('../C++/Ichimoku/Debug/DATA/ChikouSpan.json', 'utf8');
+  	const ChikouSpan = fs.readFileSync('../C++/Ichimoku/Debug/DATA/ChikouSpan.json', 'utf8');
 	console.log(ChikouSpan);
 } 
 catch (err) 
@@ -95,14 +90,15 @@ console.log(d);
 
 
 app.get("/v1/getCoins", (req, res) => {
-    res.json([{data:"BTC"},{data:"OP"},{data:"C98"}]);
-	console.log("Here:/v1/getCoins");
+    res.json([{data:"BTC"},{data:"ETH"},{data:"OP"},{data:"C98"}]);
+	console.log("HERE /v1/getCoins");
 });
 
 
 app.get("/v1/getData", (req, res) => {
+	console.log(`HERE /v1/getData CoinName is: ${req.query.coin}`);
     res.json({title:"BTC",Date:d,quantom:"1day",ChikouSpan,KijunSen,Kumo,TenkanSen,RawData});
-	console.log("Here:/v1/getData");
+	
 });
 
 

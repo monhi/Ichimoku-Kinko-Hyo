@@ -1,31 +1,51 @@
 window.onload = function () 
 {
-	FetchCoinFunction();
+	FetchActiveCoinsFunction();
 }
 
-function FetchCoinFunction()
+function add(type,name) 
+{
+	//Create an input type dynamically.   
+	var element = document.createElement("input");
+	//Assign different attributes to the element. 
+	element.type = type;
+	element.value = name; // Really? You want the default value to be the type string?
+	element.name = name; // And the name too?
+	element.classList.add("button");
+	element.classList.add("button1");
+	element.onclick = function()
+	{
+		FetchDataFunction(element.value);
+	} 
+	var container = document.getElementById("coins"); 
+	container.appendChild(element);
+}
+
+function FetchActiveCoinsFunction()
 {
 	fetch('http://localhost:3000/v1/getCoins')
 	.then(data => {
 	return data.json();
 	})
 	.then(post => {
-	console.log(post);
-	
-
+		post.map((i)=>{
+			console.log(i);
+			add("button",i.data);
+		})
 	});
-
 }
 
-function FetchFunction()
+function FetchDataFunction(coinName)
 {
-	fetch('http://localhost:3000/v1/getData')
+	console.log("FetchDataFunction is called with param:",coinName );
+
+	fetch(`http://localhost:3000/v1/getData?coin=${coinName}`)
 	.then(data => {
 	return data.json();
 	})
 	.then(post => {
-	console.log(post.title);
-	console.log(post.Date);
+	//console.log(post.title);
+	//console.log(post.Date);
 
 	let starttime = new Date(post.Date);
 	

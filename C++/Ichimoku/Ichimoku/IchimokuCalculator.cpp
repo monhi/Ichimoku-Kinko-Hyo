@@ -231,7 +231,7 @@ int CIchimokuCalculator::SaveData()
 		fclose(f4);
 	}
 
-	stemp = dir + "komu.json";
+	stemp = dir + "kumo.json";
 	FILE* f5 = fopen(stemp.c_str(), "w");
 	if (f5)
 	{

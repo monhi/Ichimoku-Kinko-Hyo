@@ -12,7 +12,7 @@ void generateChartData(std::vector<PriceData> &input)
 {
 	PriceData node;
 	node_t value = 1200;
-	for (int i = 0; i < 2000; i++) 
+	for (int i = 0; i < 256; i++) 
 	{
 		//var newDate = new Date(firstDate);
 		//newDate.setDate(newDate.getDate() + i);

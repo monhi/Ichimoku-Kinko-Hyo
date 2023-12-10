@@ -8,21 +8,40 @@
     <link rel="stylesheet" href="./css/mystyle.css">
 
     <script src="./js/diagram.js"></script>
-
 </head>
 
 <body>
-    <div class="bg-danger">
-        <div style="height:800px">
-            <div id="chartContainer" style="height: 80%; max-width: 90%; margin: 0px auto;"/>
+    <div class="d-flex">
+        <div class="d-flex flex-column bg-light">
+            <div class="d-flex d-none" id="chartJ">
+                <div class="w-100">
+                    <div id="chartContainer" style="height:700px; width: 90%; margin: 0px auto;"></div>
+                </div>
+                <div class="d-flex flex-column bg-secondary SideJL">
+                    <button class="btn btn-info m-2">5M</button>
+                    <button class="btn btn-info m-2">15M</button>
+                    <button class="btn btn-info m-2">60M</button>
+                    <button class="btn btn-info m-2">4h</button>
+                    <button class="btn btn-info m-2">1D</button>
+                </div>
+                <div class="d-flex flex-column bg-secondary SideJR">
+                    <button class="btn btn-success m-2">BUY</button>
+                    <button class="btn btn-primary m-2">SELL</button>
+                    <button class="btn btn-danger m-2">Ignore</button>
+                    <button class="btn btn-warning m-2" onclick="Hide()">Hide</button>
+                </div>
+            </div>
+            <div>
+                <div id="coins" style="width: 100%; margin: 0px;"></div>
+            </div>
         </div>
-        <div class="bg-danger">
 
-        </div>
     </div>
-
-    <div id="coins" style="height: 80%; max-width: 90%; margin: 0px auto;"/>
-
+    <script>
+        function Hide() {
+            document.getElementById("chartJ").classList.add("d-none");
+        }
+    </script>
     <script src="./js/canvasjs.min.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
 </body>

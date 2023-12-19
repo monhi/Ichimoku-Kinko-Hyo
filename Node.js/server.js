@@ -3,6 +3,7 @@ const path          = require('path');
 const { join }      = require('path');
 const app           = express();
 const fs 			= require('node:fs');
+const https  		= require('https');
 
 const PORT          = 3000;
 
@@ -111,6 +112,12 @@ app.get("/v1/getData", (req, res) => {
 	console.log(ChikouSpan);
 	
     res.json({title:curCoin,Date:startTime,quantom:"5min",RawData,TenkanSen,KijunSen,ChikouSpan,Kumo});	
+});
+
+
+app.get("/audio/notif.mp3", (req, res) => {
+	console.log(`HERE /v1/notif.mp3 `);
+
 });
 
 app.listen(PORT,()=>{

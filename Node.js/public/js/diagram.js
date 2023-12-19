@@ -2,18 +2,33 @@ window.onload = function () {
 	FetchActiveCoinsFunction();
 }
 
-function add(type, name) {
+
+
+function playSound() 
+{
+	let src = 'http://localhost:3000/Audio/notif.mp3';
+	const audio = new Audio(src);
+	audio.play();
+}
+
+function add(type, name) 
+{
 	//Create an input type dynamically.   
 	var element = document.createElement("button");
 	//Assign different attributes to the element. 
 	element.innerHTML = name; // Really? You want the default value to be the type string?
 	element.name = name; // And the name too?
+	element.id = name;
 	element.classList.add("btn");
 	element.classList.add("btn-success");
 	element.classList.add("m-1");
 	element.classList.add("btnJ");
-	element.onclick = function () {
+	element.onclick = function () 
+	{
 		FetchDataFunction(element.name);
+		document.getElementById("AAVE").classList.add("btn-danger");
+		document.getElementById("ABBC").classList.add("btn-warning");		
+		playSound();
 	}
 	var container = document.getElementById("coins");
 	container.appendChild(element);

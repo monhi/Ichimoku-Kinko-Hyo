@@ -26,8 +26,8 @@ function add(type, name)
 	element.onclick = function () 
 	{
 		FetchDataFunction(element.name);
-		document.getElementById("AAVE").classList.add("btn-danger");
-		document.getElementById("ABBC").classList.add("btn-warning");		
+		//document.getElementById("AAVE").classList.add("btn-danger");
+		//document.getElementById("ABBC").classList.add("btn-warning");		
 		playSound();
 	}
 	var container = document.getElementById("coins");
